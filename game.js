@@ -1,73 +1,75 @@
+// Score Board
 const main = document.querySelector("main");
-const win = document.querySelectorAll("#win");
-const lose = document.querySelectorAll("#lose");
-const tie = document.querySelectorAll("#tie");
-const rock= document.querySelector("#rock");
-const paper= document.querySelector("#paper");
-const scissors= document.querySelector("#scissors");
-var userchoice ;
+const winBoard = document.querySelector("#win");
+const loseBoard = document.querySelector("#lose");
+const tieBoard = document.querySelector("#tie");
+const button = document.querySelectorAll("button");
+let winNum = 0;
+let loseNum = 0;
+let tieNum = 0;
+winBoard.textContent= 0;
+loseBoard.textContent= 0;
+tieBoard.textContent= 0;
+// Global Message Variable
+var winMessage ="You Win!!!"
+var loseMessage ="Sorry, you Lose :("
+var tieMessage ="It's a Tie."
 
-var winNum = 0;
-var loseNum = 0;
-var tieNum = 0;
-function newscore(){
-    winNum;
-    loseNum;
-    tieNum;
-}
-
+// Computer Choice 
 const option= ["r", "p", "s"];
 const randomNumber= Math.floor(Math.random()* 3);
-const computerchoice= option[randomNumber];
-console.log(computerchoice);
+const computerChoice= option[randomNumber];
+console.log(computerChoice);
 
-
-rock.addEventListener("click", function() {
-    userchoice = "r"
-    console.log("r");
-}) 
-
-paper.addEventListener("click", function() {
-    userchoice = "p"
-    console.log("p");
-}) 
-
-scissors.addEventListener("click", function() {
-    userchoice = "s"
-    console.log("s");
-}) 
-
-if(userchoice === computerChoice){
-    alert(tie);
-    tieNum++;
-}else if(userchoice === "r"){
-    if(computerChoice === "s"){
-    alert(win);
-    winNum++;
-    newScore();
-    }else{
-    alert(lose);
-    loseNum++;
-    newScore();
-    }
-}else if(userchoice === "p"){
-    if(computerChoice === "r"){
-        alert(win);
-        winNum++;
-        newScore();
-    }else{
-        alert(lose);
-        loseNum++;
-        newScore();
-    }
-}else if(userchoice === "s"){
-    if(computerChoice === "p"){
-        alert(win);
-        winNum++;
-        newScore();
-    }else{
-        alert(lose);
-        loseNum++;
-        newScore();
-    }
+// Player Choice & Game 
+var userChoice ;
+const pTag = document.createElement("p")
+for (let i = 0; i < button.length; i++) {
+    button[i].addEventListener("click", function(event){
+        console.log(event.target.value);
+        userChoice = event.target.value;
+       if(userChoice === computerChoice){
+           pTag.textContent = tieMessage;
+           main.appendChild(pTag);
+           tieNum++;
+           tieBoard.textContent = tieNum;
+       }else if(userChoice === "r"){
+           if(computerChoice === "s"){
+               pTag.textContent = winMessage;
+               main.appendChild(pTag);
+               winNum++;
+               winBoard.textContent = winNum;
+           }else{
+               pTag.textContent = loseMessage;
+               main.appendChild(pTag);
+               loseNum++;
+               loseBoard.textContent = loseNum;
+           }
+       }else if(userChoice === "p"){
+            if(computerChoice === "r"){
+                pTag.textContent = winMessage;
+                main.appendChild(pTag);
+                winNum++;
+                winBoard.textContent = winNum;
+            }else{
+                pTag.textContent = loseMessage;
+               main.appendChild(pTag);
+               loseNum++;
+               loseBoard.textContent = loseNum;
+            }
+       }else if(userChoice === "s"){
+            if(computerChoice === "p"){
+                pTag.textContent = winMessage;
+                main.appendChild(pTag);
+                winNum++;
+                winBoard.textContent = winNum;
+            }else{
+                pTag.textContent = loseMessage;
+               main.appendChild(pTag);
+               loseNum++;
+               loseBoard.textContent = loseNum;
+            }
+        }
+    })
+    
 }
